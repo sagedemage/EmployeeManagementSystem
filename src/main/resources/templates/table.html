@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+  <h1>Employee Table</h1>
+  <table>
+      <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+      </tr>
+      <tr th:each="employee: ${employees}">
+          <td th:text="${employee.name}" />
+          <td th:text="${employee.email}" />
+          <td th:text="${employee.phone_number}" />
+      </tr>
+  </table>
+</body>
+</html>
