@@ -9,15 +9,23 @@
   <h1>Employee Table</h1>
   <table>
       <tr>
+          <th>#</th>
           <th>Name</th>
           <th>Email</th>
           <th>Phone Number</th>
+          <th></th>
       </tr>
       <tr th:each="employee: ${employees}">
+          <td th:text="${employee.id}" />
           <td th:text="${employee.name}" />
           <td th:text="${employee.email}" />
           <td th:text="${employee.phone_number}" />
+          <td>
+              <button>Edit</button>
+              <button th:onclick="deleteEmployee([[${employee.id}]])">Delete</button>
+          </td>
       </tr>
   </table>
 </body>
+<script src="table.js"></script>
 </html>
