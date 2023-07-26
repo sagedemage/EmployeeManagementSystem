@@ -29,31 +29,35 @@ async function deleteEmployee(id) {
     }
 }
 
-async function addEmployee() {
+function addEmployee() {
     // curl localhost:8080/employee/add
 
     const url = "/employee/add";
 
-    const data = {name: "Dan", email: "dan@email.com", phone_number: "1234535678"}
+    let add_employee_data = document.forms["add_employee_form"]
+    const employee_name = add_employee_data["name"].value;
+    const employee_email = add_employee_data["email"].value;
+    const employee_phone_number = add_employee_data["phone_number"].value;
 
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    }).then(async (response) => {
-        if (response.status === 400) {
-            const response_body = await response.json()
-            console.log("Error: " + response_body.error);
-            console.log("Message: " + response_body.message);
-        } else {
-            console.log(response.json())
-            location.reload();
-        }
-    }).catch((error) => {
-        console.log(error);
-    });
+    axios.post("/employee/add", {
+        name: employee_name,
+        email: employee_email,
+        phone_number: employee_phone_number,
+    }).then(function (response) {
+        console.log(response)
+    }).catch(function (error) {
+        console.log(error)
+    })
+}
 
+function openModal() {
+    var modal = document.getElementById("add_modal");
+    modal.style.display = "block";
+}
 
+window.onclick = function (event) {
+    var modal = document.getElementById("add_modal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }

@@ -3,17 +3,20 @@
 package com.example.EmployeeManagementSystem;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
+//import org.springframework.stereotype.RestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping(path="/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @PostMapping(path="/add")
+    //@RequestMapping(path="/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping(path="/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Status addNewEmployee(@RequestBody EmployeeBody employeeBody) {
         // name, email, phone_number
