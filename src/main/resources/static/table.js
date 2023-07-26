@@ -35,9 +35,11 @@ function addEmployee() {
         name: employee_name,
         email: employee_email,
         phone_number: employee_phone_number,
-    }).then(function (response) {
-        console.log(response)
-    }).catch(function (error) {
+        })
+        .then(function (response) {
+            console.log(response)
+        })
+        .catch(function (error) {
         console.log(error)
     })
 }
