@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>EMS - Employee Table</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Employee Table</h1>
   <table>
-      <button th:onclick="addEmployee()">Add</button>
+      <button th:onclick="openModal()">Add Employee</button>
       <tr>
           <th>#</th>
           <th>Name</th>
@@ -27,6 +28,22 @@
           </td>
       </tr>
   </table>
+    <div id="add_modal" class="modal">
+        <div class="modal_content">
+            <b>Add Employee</b>
+            <form action="#" name="add_employee_form" onsubmit="addEmployee()">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" value=""><br>
+                <label for="email">Email</label><br>
+                <input type="text" id="email" name="email" value=""><br>
+                <label for="phone_number">Phone number</label><br>
+                <input type="text" id="phone_number" name="phone_number" value=""><br>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="table.js"></script>
 </html>
