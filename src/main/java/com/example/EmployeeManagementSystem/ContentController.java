@@ -10,9 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ContentController {
+    @Autowired
+    private EmployeeRepository employeeRepository;
     @GetMapping("/content")
     public String content(@RequestParam(name="name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
         return "content";
+    }
+    @GetMapping("/table")
+    public String fetchEmployees(Model model) {
+        Iterable<Employee> employees = employeeRepository.findAll();
+        model.addAttribute("employees", employees);
+        return "table";
     }
 }
