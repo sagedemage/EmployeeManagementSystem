@@ -29,3 +29,7 @@ async function deleteEmployee(id) {
         });
     }
 }
+
+async function addEmployee() {
+    // curl localhost:8080/employee/add -d name=Bob -d email=bob@email.com -d phone_number=1234562341
+}

@@ -14,13 +14,25 @@ public class EmployeeController {
     private EmployeeRepository employeeRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody Status addNewEmployee(@RequestParam String name, @RequestParam String email,
-                                           @RequestParam String phone_number) {
+    @ResponseBody
+    public Status addNewEmployee(@RequestBody EmployeeBody employeeBody) {
+        // name, email, phone_number
         // Create
         Employee n = new Employee();
-        n.setName(name);
-        n.setEmail(email);
-        n.setPhone_number(phone_number);
+
+        if (employeeBody.getName() == null) {
+            return new Status("Name is empty");
+        }
+        else if (employeeBody.getEmail() == null) {
+            return new Status("Email is empty");
+        }
+        else if (employeeBody.getPhone_number() == null) {
+            return new Status("Phone number is empty");
+        }
+
+        n.setName(employeeBody.getName());
+        n.setEmail(employeeBody.getEmail());
+        n.setPhone_number(employeeBody.getPhone_number());
         employeeRepository.save(n);
         return new Status("Saved");
     }
