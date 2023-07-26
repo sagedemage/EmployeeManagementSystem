@@ -22,9 +22,8 @@ async function deleteEmployee(id) {
 }
 
 function addEmployee() {
+    console.log("Add")
     // curl localhost:8080/employee/add
-
-    const url = "/employee/add";
 
     let add_employee_data = document.forms["add_employee_form"]
     const employee_name = add_employee_data["name"].value;
@@ -40,8 +39,8 @@ function addEmployee() {
             console.log(response)
         })
         .catch(function (error) {
-        console.log(error)
-    })
+            console.log(error)
+        })
 }
 
 function openModal() {
