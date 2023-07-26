@@ -26,7 +26,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping(path="/delete")
-    public @ResponseBody Status removeEmployee(@RequestParam("id") int id) {
+    public @ResponseBody Status removeEmployee(@RequestParam int id) {
         // Delete
         employeeRepository.deleteById(id);
         return new Status("Deleted");
