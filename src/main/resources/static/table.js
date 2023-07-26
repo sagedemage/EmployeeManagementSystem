@@ -19,8 +19,7 @@ async function deleteEmployee(id) {
                 const response_body = await response.json()
                 console.log("Error: " + response_body.error);
                 console.log("Message: " + response_body.message);
-            }
-            else {
+            } else {
                 console.log(response.json())
                 location.reload();
             }
@@ -31,5 +30,30 @@ async function deleteEmployee(id) {
 }
 
 async function addEmployee() {
-    // curl localhost:8080/employee/add -d name=Bob -d email=bob@email.com -d phone_number=1234562341
+    // curl localhost:8080/employee/add
+
+    const url = "/employee/add";
+
+    const data = {name: "Dan", email: "dan@email.com", phone_number: "1234535678"}
+
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(async (response) => {
+        if (response.status === 400) {
+            const response_body = await response.json()
+            console.log("Error: " + response_body.error);
+            console.log("Message: " + response_body.message);
+        } else {
+            console.log(response.json())
+            location.reload();
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+
+
 }
