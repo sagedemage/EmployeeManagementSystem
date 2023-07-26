@@ -1,7 +1,5 @@
 async function deleteEmployee(id) {
-    console.log("Delete");
     // curl -X DELETE localhost:8080/employee/delete -d id=53
-
     const delete_confirm = confirm("Are you sure you want to delete this employee?")
 
     if (delete_confirm === true) {
@@ -11,7 +9,7 @@ async function deleteEmployee(id) {
                     console.log("Error: " + response.data.error);
                     console.log("Message: " + response.data.message);
                 } else {
-                    console.log(response);
+                    console.log(response.data)
                     location.reload();
                 }
             })
@@ -22,9 +20,7 @@ async function deleteEmployee(id) {
 }
 
 function addEmployee() {
-    console.log("Add")
     // curl localhost:8080/employee/add
-
     let add_employee_data = document.forms["add_employee_form"]
     const employee_name = add_employee_data["name"].value;
     const employee_email = add_employee_data["email"].value;
@@ -36,7 +32,7 @@ function addEmployee() {
         phone_number: employee_phone_number,
         })
         .then(function (response) {
-            console.log(response)
+            console.log(response.data)
             location.reload();
         })
         .catch(function (error) {

@@ -9,46 +9,45 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping(path="/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
     //@RequestMapping(path="/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping(path="/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Status addNewEmployee(@RequestBody EmployeeBody employeeBody) {
+    public MessageStatus addNewEmployee(@RequestBody EmployeeBody employeeBody) {
         // name, email, phone_number
         // Create
         Employee n = new Employee();
 
         if (employeeBody.getName() == null) {
-            return new Status("Name is empty");
+            return new MessageStatus("Error", "Name is empty");
         }
         else if (employeeBody.getEmail() == null) {
-            return new Status("Email is empty");
+            return new MessageStatus("Error", "Email is empty");
         }
         else if (employeeBody.getPhone_number() == null) {
-            return new Status("Phone number is empty");
+            return new MessageStatus("Error", "Phone number is empty");
         }
 
         n.setName(employeeBody.getName());
         n.setEmail(employeeBody.getEmail());
         n.setPhone_number(employeeBody.getPhone_number());
         employeeRepository.save(n);
-        return new Status("Saved");
+        return new MessageStatus("Success", "Added");
     }
 
     @DeleteMapping(path="/delete")
-    public @ResponseBody Status removeEmployee(@RequestParam int id) {
+    public @ResponseBody MessageStatus removeEmployee(@RequestParam int id) {
         // Delete
         employeeRepository.deleteById(id);
-        return new Status("Deleted");
+        return new MessageStatus("Success", "Deleted");
     }
 
     @PatchMapping(path="/update")
-    public @ResponseBody Status updateEmployee(@RequestParam int id, @RequestParam String name,
+    public @ResponseBody MessageStatus updateEmployee(@RequestParam int id, @RequestParam String name,
                                                @RequestParam String email, @RequestParam String phone_number) {
         // Update
         Employee employee = employeeRepository.findById(id).get();
@@ -56,7 +55,7 @@ public class EmployeeController {
         employee.setEmail(email);
         employee.setPhone_number(phone_number);
         employeeRepository.save(employee);
-        return new Status("Updated");
+        return new MessageStatus("Success", "Updated");
     }
 
     @GetMapping(path="/all")
@@ -66,9 +65,9 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/table")
-    public @ResponseBody Status fetchEmployees(Model model) {
+    public @ResponseBody MessageStatus fetchEmployees(Model model) {
         Iterable<Employee> employees = employeeRepository.findAll();
         model.addAttribute("employees", employees);
-        return new Status("Fetched");
+        return new MessageStatus("Success", "Fetched");
     }
 }
