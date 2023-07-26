@@ -37,9 +37,13 @@ function addEmployee() {
         })
         .then(function (response) {
             console.log(response)
+            location.reload();
         })
         .catch(function (error) {
-            console.log(error)
+            console.log("Stack: " + error.stack);
+            console.log("Message: " + error.message);
+            console.log("Name: " + error.name);
+            console.log("Code: " + error.code);
         })
 }
 

@@ -31,7 +31,7 @@
     <div id="add_modal" class="modal">
         <div class="modal_content">
             <b>Add Employee</b>
-            <form action="#" name="add_employee_form" onsubmit="addEmployee()">
+            <form action="#" name="add_employee_form">
                 <label for="name">Name:</label><br>
                 <input type="text" id="name" name="name" value=""><br>
                 <label for="email">Email</label><br>
@@ -39,7 +39,7 @@
                 <label for="phone_number">Phone number</label><br>
                 <input type="text" id="phone_number" name="phone_number" value=""><br>
                 <br>
-                <button type="submit">Submit</button>
+                <button type="button" onclick="addEmployee()">Submit</button>
             </form>
         </div>
     </div>
