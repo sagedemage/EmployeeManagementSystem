@@ -9,7 +9,7 @@
 <body>
   <h1>Employee Table</h1>
   <table>
-      <button th:onclick="openModal()">Add Employee</button>
+      <button th:onclick="addOpenModal()">Add Employee</button>
       <tr>
           <th>#</th>
           <th>Name</th>
@@ -23,26 +23,44 @@
           <td th:text="${employee.email}" />
           <td th:text="${employee.phone_number}" />
           <td>
-              <button>Edit</button>
+              <button th:onclick="editOpenModal([[${employee.id}]])">Edit</button>
               <button th:onclick="deleteEmployee([[${employee.id}]])">Delete</button>
           </td>
       </tr>
   </table>
+  <!-- Add modal -->
     <div id="add_modal" class="modal">
         <div class="modal_content">
             <b>Add Employee</b>
             <form action="#" name="add_employee_form">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name" value=""><br>
-                <label for="email">Email</label><br>
-                <input type="text" id="email" name="email" value=""><br>
-                <label for="phone_number">Phone number</label><br>
-                <input type="text" id="phone_number" name="phone_number" value=""><br>
+                <label for="add_name">Name:</label><br>
+                <input type="text" id="add_name" name="name" value=""><br>
+                <label for="add_email">Email</label><br>
+                <input type="text" id="add_email" name="email" value=""><br>
+                <label for="add_phone_number">Phone number</label><br>
+                <input type="text" id="add_phone_number" name="phone_number" value=""><br>
                 <br>
                 <button type="button" onclick="addEmployee()">Submit</button>
             </form>
         </div>
     </div>
+
+  <!-- Edit Modal -->
+    <div id="edit_modal" class="modal">
+      <div class="modal_content">
+          <b>Edit Employee</b>
+          <form action="#" name="edit_employee_form">
+              <label for="add_name">Name:</label><br>
+              <input type="text" id="edit_name" name="name" value=""><br>
+              <label for="add_email">Email</label><br>
+              <input type="text" id="edit_email" name="email" value=""><br>
+              <label for="add_phone_number">Phone number</label><br>
+              <input type="text" id="edit_phone_number" name="phone_number" value=""><br>
+              <br>
+              <button type="button" onclick="editEmployee()">Submit</button>
+          </form>
+      </div>
+  </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="table.js"></script>
