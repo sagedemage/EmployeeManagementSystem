@@ -19,7 +19,7 @@ public class ContentController {
     }
     @GetMapping("/table")
     public String fetchEmployees(Model model) {
-        /* Read all employee api to get all employees from an employee database
+        /* Fetch all employee api to get all employees
          * and show the data on the table page
          */
         Iterable<Employee> employees = employeeRepository.findAll();
