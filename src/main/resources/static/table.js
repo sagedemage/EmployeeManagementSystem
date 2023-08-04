@@ -80,14 +80,14 @@ function editEmployee() {
 }
 
 window.onclick = function (event) {
-    var modal = document.getElementById("add_modal");
-    if (event.target == modal) {
-        modal.style.display = "none";
+    let add_modal = document.getElementById("add_modal");
+    if (event.target == add_modal) {
+        add_modal.style.display = "none";
     }
 
-    var modal = document.getElementById("edit_modal");
-    if (event.target == modal) {
-        modal.style.display = "none";
+    let edit_modal = document.getElementById("edit_modal");
+    if (event.target == edit_modal) {
+        edit_modal.style.display = "none";
         localStorage.removeItem("employee_id");
     }
 }
