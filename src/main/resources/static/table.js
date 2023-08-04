@@ -1,5 +1,56 @@
+/* Employee CRUD operations */
+function addEmployee() {
+    /* Add Employee (CREATE) */
+    let add_employee_data = document.forms["add_employee_form"]
+    const employee_name = add_employee_data["add_name"].value;
+    const employee_email = add_employee_data["add_email"].value;
+    const employee_phone_number = add_employee_data["add_phone_number"].value;
+
+    axios.post("/employee/add", {
+        name: employee_name,
+        email: employee_email,
+        phone_number: employee_phone_number,
+    })
+        .then(function (response) {
+            console.log(response.data)
+            location.reload();
+        })
+        .catch(function (error) {
+            console.log("Stack: " + error.stack);
+            console.log("Message: " + error.message);
+            console.log("Name: " + error.name);
+            console.log("Code: " + error.code);
+        })
+}
+
+function editEmployee() {
+    /* Edit employee data (UPDATE) */
+    let employee_id = parseInt(localStorage.getItem("employee_id"))
+    let add_employee_data = document.forms["edit_employee_form"]
+    const employee_name = add_employee_data["edit_name"].value;
+    const employee_email = add_employee_data["edit_email"].value;
+    const employee_phone_number = add_employee_data["edit_phone_number"].value;
+
+    axios.patch("/employee/update", {
+        id: employee_id,
+        name: employee_name,
+        email: employee_email,
+        phone_number: employee_phone_number,
+    })
+        .then(function (response) {
+            console.log(response.data)
+            location.reload();
+        })
+        .catch(function (error) {
+            console.log("Stack: " + error.stack);
+            console.log("Message: " + error.message);
+            console.log("Name: " + error.name);
+            console.log("Code: " + error.code);
+        })
+}
+
 async function deleteEmployee(id) {
-    // curl -X DELETE localhost:8080/employee/delete -d id=53
+    /* Delete employee (DELETE) */
     const delete_confirm = confirm("Are you sure you want to delete this employee?")
 
     if (delete_confirm === true) {
@@ -19,31 +70,9 @@ async function deleteEmployee(id) {
     }
 }
 
-function addEmployee() {
-    // curl localhost:8080/employee/add
-    let add_employee_data = document.forms["add_employee_form"]
-    const employee_name = add_employee_data["add_name"].value;
-    const employee_email = add_employee_data["add_email"].value;
-    const employee_phone_number = add_employee_data["add_phone_number"].value;
-
-    axios.post("/employee/add", {
-        name: employee_name,
-        email: employee_email,
-        phone_number: employee_phone_number,
-        })
-        .then(function (response) {
-            console.log(response.data)
-            location.reload();
-        })
-        .catch(function (error) {
-            console.log("Stack: " + error.stack);
-            console.log("Message: " + error.message);
-            console.log("Name: " + error.name);
-            console.log("Code: " + error.code);
-        })
-}
-
+/* Modal GUI */
 function editOpenModal(employee_id) {
+    /* Open modal containing a form to edit an employee */
     localStorage.setItem("employee_id", employee_id)
     let modal = document.getElementById("edit_modal");
     modal.style.display = "block";
@@ -69,36 +98,13 @@ function editOpenModal(employee_id) {
 }
 
 function addOpenModal() {
+    /* Open modal containing a form to add an employee */
     let modal = document.getElementById("add_modal");
     modal.style.display = "block";
 }
 
-function editEmployee() {
-    let employee_id = parseInt(localStorage.getItem("employee_id"))
-    let add_employee_data = document.forms["edit_employee_form"]
-    const employee_name = add_employee_data["edit_name"].value;
-    const employee_email = add_employee_data["edit_email"].value;
-    const employee_phone_number = add_employee_data["edit_phone_number"].value;
-
-    axios.patch("/employee/update", {
-        id: employee_id,
-        name: employee_name,
-        email: employee_email,
-        phone_number: employee_phone_number,
-    })
-        .then(function (response) {
-            console.log(response.data)
-            location.reload();
-        })
-        .catch(function (error) {
-            console.log("Stack: " + error.stack);
-            console.log("Message: " + error.message);
-            console.log("Name: " + error.name);
-            console.log("Code: " + error.code);
-        })
-}
-
 window.onclick = function (event) {
+    /* Handle closing an open modal */
     let add_modal = document.getElementById("add_modal");
     if (event.target == add_modal) {
         add_modal.style.display = "none";
