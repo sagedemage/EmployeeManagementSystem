@@ -47,13 +47,12 @@ public class EmployeeController {
     }
 
     @PatchMapping(path="/update")
-    public @ResponseBody MessageStatus updateEmployee(@RequestParam int id, @RequestParam String name,
-                                               @RequestParam String email, @RequestParam String phone_number) {
+    public @ResponseBody MessageStatus updateEmployee(@RequestBody EmployeeBody employeeBody) {
         // Update
-        Employee employee = employeeRepository.findById(id).get();
-        employee.setName(name);
-        employee.setEmail(email);
-        employee.setPhone_number(phone_number);
+        Employee employee = employeeRepository.findById(employeeBody.getId()).get();
+        employee.setName(employeeBody.getName());
+        employee.setEmail(employeeBody.getEmail());
+        employee.setPhone_number(employeeBody.getPhone_number());
         employeeRepository.save(employee);
         return new MessageStatus("Success", "Updated");
     }
