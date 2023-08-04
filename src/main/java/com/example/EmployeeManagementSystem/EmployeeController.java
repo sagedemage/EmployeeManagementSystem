@@ -57,9 +57,17 @@ public class EmployeeController {
         return new MessageStatus("Success", "Updated");
     }
 
+    @GetMapping(path="fetch")
+    @ResponseBody
+    public Employee fetchEmployee(@RequestParam int id) {
+        // Read
+        Employee employee = employeeRepository.findById(id).get();
+        return employee;
+    }
+
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Employee> getAllEmployees() {
-        // Read
+        // Read All
         return employeeRepository.findAll();
     }
 
