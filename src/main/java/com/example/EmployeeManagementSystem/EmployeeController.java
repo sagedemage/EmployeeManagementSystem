@@ -16,7 +16,7 @@ public class EmployeeController {
 
     /* CRUD Employee APIs */
     @PostMapping(path="/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MessageStatus addNewEmployee(@RequestBody EmployeeBody employeeBody) {
+    public MessageStatus addNewEmployee(@RequestBody Employee employeeBody) {
         /* Add employee api with data (CREATE)
          * The required attributes: name, email, and phone_number
          */
@@ -53,7 +53,7 @@ public class EmployeeController {
     }
 
     @PatchMapping(path="/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody MessageStatus updateEmployee(@RequestBody EmployeeBody employeeBody) {
+    public @ResponseBody MessageStatus updateEmployee(@RequestBody Employee employeeBody) {
         /* Update employee api with updates the data of employee (UPDATE)
          * The required attributes: name, email, and phone_number
          */
