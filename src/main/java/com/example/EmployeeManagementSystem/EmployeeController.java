@@ -4,7 +4,6 @@ package com.example.EmployeeManagementSystem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -84,15 +83,5 @@ public class EmployeeController {
          */
         employeeRepository.deleteById(id);
         return new MessageStatus("Success", "Deleted");
-    }
-
-    @GetMapping(path = "/table")
-    public @ResponseBody MessageStatus fetchEmployees(Model model) {
-        /* Read all employee api to get all employees from an employee database
-         * and show the data on the table page
-         */
-        Iterable<Employee> employees = employeeRepository.findAll();
-        model.addAttribute("employees", employees);
-        return new MessageStatus("Success", "Fetched");
     }
 }
