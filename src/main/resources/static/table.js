@@ -71,12 +71,12 @@ function editEmployee() {
         })
 }
 
-async function deleteEmployee(id) {
+async function deleteEmployee(employee_id) {
     /* Delete employee (DELETE) */
     const delete_confirm = confirm("Are you sure you want to delete this employee?")
 
     if (delete_confirm === true) {
-        axios.delete("/employee/delete?id=" + id)
+        axios.delete("/employee/delete?id=" + employee_id)
             .then(function (response) {
                 if (response.status === 400) {
                     console.log("Error: " + response.data.error);
