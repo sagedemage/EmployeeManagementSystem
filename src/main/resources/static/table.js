@@ -23,6 +23,28 @@ function addEmployee() {
         })
 }
 
+function fetchEmployee(employee_id) {
+    /* Fetch employee data (READ) */
+    let name = document.getElementById("edit_name");
+    let email = document.getElementById("edit_email");
+    let phone_number = document.getElementById("edit_phone_number");
+
+    // fetch employee data
+    axios.get("/employee/fetch?id=" + employee_id)
+        .then(function (response) {
+            console.log(response.data)
+            name.value = response.data.name;
+            email.value = response.data.email;
+            phone_number.value = response.data.phone_number;
+        })
+        .catch(function (error) {
+            console.log("Stack: " + error.stack);
+            console.log("Message: " + error.message);
+            console.log("Name: " + error.name);
+            console.log("Code: " + error.code);
+        })
+}
+
 function editEmployee() {
     /* Edit employee data (UPDATE) */
     let employee_id = parseInt(localStorage.getItem("employee_id"))
@@ -77,24 +99,7 @@ function editOpenModal(employee_id) {
     let modal = document.getElementById("edit_modal");
     modal.style.display = "block";
 
-    let name = document.getElementById("edit_name");
-    let email = document.getElementById("edit_email");
-    let phone_number = document.getElementById("edit_phone_number");
-
-    // fetch employee data
-    axios.get("/employee/fetch?id=" + employee_id)
-        .then(function (response) {
-            console.log(response.data)
-            name.value = response.data.name;
-            email.value = response.data.email;
-            phone_number.value = response.data.phone_number;
-        })
-        .catch(function (error) {
-            console.log("Stack: " + error.stack);
-            console.log("Message: " + error.message);
-            console.log("Name: " + error.name);
-            console.log("Code: " + error.code);
-        })
+    fetchEmployee(employee_id)
 }
 
 function addOpenModal() {
