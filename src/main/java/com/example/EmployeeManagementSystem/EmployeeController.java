@@ -14,7 +14,7 @@ public class EmployeeController {
     private EmployeeRepository employeeRepository;
 
     /* CRUD Employee APIs */
-    @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MessageStatus addNewEmployee(@RequestBody Employee employeeBody) {
         /* Add employee api with data (CREATE)
          * The required attributes: name, email, and phone_number
@@ -38,7 +38,7 @@ public class EmployeeController {
         return new MessageStatus("Success", "Added");
     }
 
-    @GetMapping(path = "fetch", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "fetch", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Employee fetchEmployee(@RequestParam int id) {
         /* Fetch employee api with data of the employee (READ)
@@ -49,7 +49,8 @@ public class EmployeeController {
         return employee;
     }
 
-    @PatchMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody MessageStatus updateEmployee(@RequestBody Employee employeeBody) {
         /* Update employee api with updates the data of employee (UPDATE)
          * The required attributes: name, email, and phone_number
@@ -72,7 +73,7 @@ public class EmployeeController {
         return new MessageStatus("Success", "Updated");
     }
 
-    @DeleteMapping(path = "/delete", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody MessageStatus removeEmployee(@RequestParam int id) {
         /* Delete employee api (DELETE)
          * The required attributes: id
@@ -81,7 +82,7 @@ public class EmployeeController {
         return new MessageStatus("Success", "Deleted");
     }
 
-    @GetMapping(path = "/fetch-all", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/fetch-all", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Iterable<Employee> fetchEmployees() {
         /* Fetch all employee api to get a list of all employees
          */
