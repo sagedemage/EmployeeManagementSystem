@@ -1,10 +1,49 @@
 import { ref } from 'vue'
 export default {
     async setup() {
-        /*
-        const response = axios.get("/employee/fetch-all")
+        const response = await axios.get("/employee/fetch-all")
+
+        const employees = response.data;
+
+        console.log(employees)
+
+        window.onclick = function (event) {
+            /* Handle closing an open modal */
+            let add_modal = document.getElementById("add_modal");
+            if (event.target == add_modal) {
+                add_modal.style.display = "none";
+            }
+
+            let edit_modal = document.getElementById("edit_modal");
+            if (event.target == edit_modal) {
+                edit_modal.style.display = "none";
+                localStorage.removeItem("employee_id");
+            }
+        }
+
+        return { employees }
+    },
+    methods: {
+        openAddModal() {
+            /* Open modal containing a form to add an employee */
+            let modal = document.getElementById("add_modal");
+            modal.style.display = "block";
+        },
+        addEmployee() {
+            /* Add Employee (CREATE) */
+            let add_employee_data = document.forms["add_employee_form"];
+            const employee_name = add_employee_data["add_name"].value;
+            const employee_email = add_employee_data["add_email"].value;
+            const employee_phone_number = add_employee_data["add_phone_number"].value;
+
+            axios.post("/employee/add", {
+                name: employee_name,
+                email: employee_email,
+                phone_number: employee_phone_number,
+            })
             .then(function (response) {
                 console.log(response.data)
+                location.reload();
             })
             .catch(function (error) {
                 console.log("Stack: " + error.stack);
@@ -12,20 +51,86 @@ export default {
                 console.log("Name: " + error.name);
                 console.log("Code: " + error.code);
             })
-        */
+        },
+        deleteEmployee(employee_id) {
+            /* Delete employee (DELETE) */
+            const delete_confirm = confirm("Are you sure you want to delete this employee?")
 
-        const response = await axios.get("/employee/fetch-all")
+            if (delete_confirm === true) {
+                axios.delete("/employee/delete?id=" + employee_id)
+                    .then(function (response) {
+                        if (response.status === 400) {
+                            console.log("Error: " + response.data.error);
+                            console.log("Message: " + response.data.message);
+                        } else {
+                            console.log(response.data)
+                            location.reload();
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+            }
+        },
+        fetchEmployee(employee_id) {
+            /* Fetch employee data (READ) */
+            let name = document.getElementById("edit_name");
+            let email = document.getElementById("edit_email");
+            let phone_number = document.getElementById("edit_phone_number");
 
-        const employees = response.data;
+            // fetch employee data
+            axios.get("/employee/fetch?id=" + employee_id)
+                .then(function (response) {
+                    console.log(response.data)
+                    name.value = response.data.name;
+                    email.value = response.data.email;
+                    phone_number.value = response.data.phone_number;
+                })
+                .catch(function (error) {
+                    console.log("Stack: " + error.stack);
+                    console.log("Message: " + error.message);
+                    console.log("Name: " + error.name);
+                    console.log("Code: " + error.code);
+                })
+        },
+        openEditModal(employee_id) {
+            /* Open modal containing a form to edit an employee */
+            localStorage.setItem("employee_id", employee_id)
+            let modal = document.getElementById("edit_modal");
+            modal.style.display = "block";
 
-        console.log(employees)
+            this.fetchEmployee(employee_id)
+        },
+        editEmployee() {
+            /* Edit employee data (UPDATE) */
+            let employee_id = parseInt(localStorage.getItem("employee_id"))
+            let add_employee_data = document.forms["edit_employee_form"]
+            const employee_name = add_employee_data["edit_name"].value;
+            const employee_email = add_employee_data["edit_email"].value;
+            const employee_phone_number = add_employee_data["edit_phone_number"].value;
 
-        return { employees }
+            axios.patch("/employee/update", {
+                id: employee_id,
+                name: employee_name,
+                email: employee_email,
+                phone_number: employee_phone_number,
+            })
+                .then(function (response) {
+                    console.log(response.data)
+                    location.reload();
+                })
+                .catch(function (error) {
+                    console.log("Stack: " + error.stack);
+                    console.log("Message: " + error.message);
+                    console.log("Name: " + error.name);
+                    console.log("Code: " + error.code);
+                })
+        },
     },
     template: /*html*/`
         <h1>Employee Table</h1>
         <p>This is the home page</p>
-        <button>Add Employee</button>
+        <button v-on:click="openAddModal()">Add Employee</button>
         <table>
             <th>Name</th>
             <th>Email</th>
@@ -36,10 +141,44 @@ export default {
                 <td>{{ employee.email }}</td> 
                 <td>{{ employee.phone_number }}</td>
                 <td>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button v-on:click="openEditModal(employee.id)">Edit</button>
+                    <button v-on:click="deleteEmployee(employee.id)">Delete</button>
                 </td>
             </tr>
         </table>
+        
+        <!-- Add modal -->
+        <div id="add_modal" class="modal">
+            <div class="modal_content">
+                <b>Add Employee</b>
+                <form action="#" name="add_employee_form">
+                    <label for="add_name">Name:</label><br>
+                    <input type="text" id="add_name" name="name" value=""><br>
+                    <label for="add_email">Email</label><br>
+                    <input type="text" id="add_email" name="email" value=""><br>
+                    <label for="add_phone_number">Phone number</label><br>
+                    <input type="text" id="add_phone_number" name="phone_number" value=""><br>
+                    <br>
+                    <button type="button" v-on:click="addEmployee()">Submit</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Edit Modal -->
+        <div id="edit_modal" class="modal">
+            <div class="modal_content">
+                <b>Edit Employee</b>
+                <form action="#" name="edit_employee_form">
+                    <label for="add_name">Name:</label><br>
+                    <input type="text" id="edit_name" name="name" value=""><br>
+                    <label for="add_email">Email</label><br>
+                    <input type="text" id="edit_email" name="email" value=""><br>
+                    <label for="add_phone_number">Phone number</label><br>
+                    <input type="text" id="edit_phone_number" name="phone_number" value=""><br>
+                    <br>
+                    <button type="button" v-on:click="editEmployee()">Submit</button>
+                </form>
+            </div>
+        </div>
     `
 }
