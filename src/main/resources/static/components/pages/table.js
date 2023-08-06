@@ -16,42 +16,30 @@ export default {
 
         const response = await axios.get("/employee/fetch-all")
 
-        console.log(response.data)
+        const employees = response.data;
 
-        const data = response.data;
+        console.log(employees)
 
-        return { data }
+        return { employees }
     },
     template: /*html*/`
         <h1>Employee Table</h1>
         <p>This is the home page</p>
-         <table>
-      <button>Add Employee</button>
-      <li v-for="employee in data">
-        {{ employee }}
-      </li>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone Number</th>
-          <th></th>
-      </tr>
-      <tr>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td>
-              <button>Edit</button>
-              <button>Delete</button>
-          </td>
-      </tr>
-  </table>
+        <button>Add Employee</button>
+        <table>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th></th>
+            <tr v-for="employee in employees">
+                <td>{{ employee.name }}</td> 
+                <td>{{ employee.email }}</td> 
+                <td>{{ employee.phone_number }}</td>
+                <td>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+        </table>
     `
 }
