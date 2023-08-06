@@ -3,6 +3,7 @@ import Home from './components/pages/home.js'
 import About from './components/pages/about.js'
 import Navbar from './components/ui/navbar.js'
 import Footer from './components/ui/footer.js'
+import Table from "./components/pages/table.js";
 
 export default {
     components: {
@@ -13,7 +14,8 @@ export default {
         const count = ref(0)
         const routes = {
             '/': Home,
-            '/about': About
+            '/about': About,
+            '/table': Table,
         }
 
         const currentPath = ref(window.location.hash)
@@ -32,7 +34,9 @@ export default {
         <div id="body">
             <Navbar />
             <div id="content">
-                <component :is="currentView" />
+                <Suspense>
+                    <component :is="currentView" />
+                </Suspense>
             </div>
             <Footer />
         </div>
