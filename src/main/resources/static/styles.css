@@ -1,3 +1,21 @@
+#content {
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 75px;
+}
+
+#copyright {
+    height: 75px;
+    text-align: center;
+    margin-top: auto;
+}
+
+#body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -20,3 +38,4 @@
     border: 1px solid #888;
     width: 80%;
 }
+
