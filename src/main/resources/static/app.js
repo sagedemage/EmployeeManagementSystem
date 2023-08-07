@@ -3,7 +3,7 @@ import Home from './components/pages/home.js'
 import About from './components/pages/about.js'
 import Navbar from './components/ui/navbar.js'
 import Footer from './components/ui/footer.js'
-import Table from "./components/pages/table.js";
+import Table from './components/pages/table.js';
 
 export default {
     components: {
