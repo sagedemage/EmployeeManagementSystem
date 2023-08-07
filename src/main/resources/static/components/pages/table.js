@@ -1,9 +1,15 @@
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+
 export default {
     async setup() {
         const response = await axios.get("/employee/fetch-all")
 
         const employees = response.data;
+
+        let employee_id = ref(0);
+        let employee_name = ref("");
+        let employee_email = ref("");
+        let employee_phone_number = ref("");
 
         console.log(employees)
 
@@ -21,7 +27,7 @@ export default {
             }
         }
 
-        return { employees }
+        return { employees, employee_id, employee_name, employee_email, employee_phone_number }
     },
     methods: {
         openAddModal() {
@@ -31,25 +37,17 @@ export default {
         },
         addEmployee() {
             /* Add Employee (CREATE) */
-            let add_employee_data = document.forms["add_employee_form"];
-            const employee_name = add_employee_data["add_name"].value;
-            const employee_email = add_employee_data["add_email"].value;
-            const employee_phone_number = add_employee_data["add_phone_number"].value;
-
             axios.post("/employee/add", {
-                name: employee_name,
-                email: employee_email,
-                phone_number: employee_phone_number,
+                name: this.employee_name,
+                email: this.employee_email,
+                phone_number: this.employee_phone_number,
             })
-            .then(function (response) {
+            .then((response) => {
                 console.log(response.data)
                 location.reload();
             })
-            .catch(function (error) {
-                console.log("Stack: " + error.stack);
-                console.log("Message: " + error.message);
-                console.log("Name: " + error.name);
-                console.log("Code: " + error.code);
+            .catch((error) => {
+                console.log(error)
             })
         },
         deleteEmployee(employee_id) {
@@ -58,7 +56,7 @@ export default {
 
             if (delete_confirm === true) {
                 axios.delete("/employee/delete?id=" + employee_id)
-                    .then(function (response) {
+                    .then((response) => {
                         if (response.status === 400) {
                             console.log("Error: " + response.data.error);
                             console.log("Message: " + response.data.message);
@@ -67,63 +65,54 @@ export default {
                             location.reload();
                         }
                     })
-                    .catch(function (error) {
+                    .catch((error) => {
                         console.log(error)
                     })
             }
         },
         fetchEmployee(employee_id) {
             /* Fetch employee data (READ) */
-            let name = document.getElementById("edit_name");
-            let email = document.getElementById("edit_email");
-            let phone_number = document.getElementById("edit_phone_number");
-
             // fetch employee data
             axios.get("/employee/fetch?id=" + employee_id)
-                .then(function (response) {
+                .then((response) => {
                     console.log(response.data)
-                    name.value = response.data.name;
-                    email.value = response.data.email;
-                    phone_number.value = response.data.phone_number;
+                    this.employee_name = response.data.name;
+                    this.employee_email = response.data.email;
+                    this.employee_phone_number = response.data.phone_number;
                 })
-                .catch(function (error) {
-                    console.log("Stack: " + error.stack);
-                    console.log("Message: " + error.message);
-                    console.log("Name: " + error.name);
-                    console.log("Code: " + error.code);
+                .catch((error) => {
+                    console.log(error)
                 })
         },
         openEditModal(employee_id) {
             /* Open modal containing a form to edit an employee */
-            localStorage.setItem("employee_id", employee_id)
+            //localStorage.setItem("employee_id", employee_id)
+
+            if (employee_id !== 0) {
+                this.employee_id = employee_id
+            }
+
             let modal = document.getElementById("edit_modal");
             modal.style.display = "block";
 
-            this.fetchEmployee(employee_id)
+            this.fetchEmployee(this.employee_id)
         },
         editEmployee() {
             /* Edit employee data (UPDATE) */
-            let employee_id = parseInt(localStorage.getItem("employee_id"))
-            let add_employee_data = document.forms["edit_employee_form"]
-            const employee_name = add_employee_data["edit_name"].value;
-            const employee_email = add_employee_data["edit_email"].value;
-            const employee_phone_number = add_employee_data["edit_phone_number"].value;
+            let employee_id = this.employee_id
 
             axios.patch("/employee/update", {
-                id: employee_id,
-                name: employee_name,
-                email: employee_email,
-                phone_number: employee_phone_number,
+                id: this.employee_id,
+                name: this.employee_name,
+                email: this.employee_email,
+                phone_number: this.employee_phone_number,
             })
-                .then(function (response) {
+                .then((response) => {
                     console.log(response.data)
                     location.reload();
                 })
-                .catch(function (error) {
-                    console.log("Stack: " + error.stack);
-                    console.log("Message: " + error.message);
-                    console.log("Name: " + error.name);
-                    console.log("Code: " + error.code);
+                .catch((error) => {
+                    console.log(error)
                 })
         },
     },
@@ -153,11 +142,11 @@ export default {
                 <b>Add Employee</b>
                 <form action="#" name="add_employee_form">
                     <label for="add_name">Name:</label><br>
-                    <input type="text" id="add_name" name="name" value=""><br>
+                    <input v-model="employee_name" type="text" id="add_name" name="name" value=""><br>
                     <label for="add_email">Email</label><br>
-                    <input type="text" id="add_email" name="email" value=""><br>
+                    <input v-model="employee_email" type="text" id="add_email" name="email" value=""><br>
                     <label for="add_phone_number">Phone number</label><br>
-                    <input type="text" id="add_phone_number" name="phone_number" value=""><br>
+                    <input v-model="employee_phone_number" type="text" id="add_phone_number" name="phone_number" value=""><br>
                     <br>
                     <button type="button" v-on:click="addEmployee()">Submit</button>
                 </form>
@@ -170,11 +159,11 @@ export default {
                 <b>Edit Employee</b>
                 <form action="#" name="edit_employee_form">
                     <label for="add_name">Name:</label><br>
-                    <input type="text" id="edit_name" name="name" value=""><br>
+                    <input v-model="employee_name" type="text" id="edit_name" name="name" value=""><br>
                     <label for="add_email">Email</label><br>
-                    <input type="text" id="edit_email" name="email" value=""><br>
+                    <input v-model="employee_email" type="text" id="edit_email" name="email" value=""><br>
                     <label for="add_phone_number">Phone number</label><br>
-                    <input type="text" id="edit_phone_number" name="phone_number" value=""><br>
+                    <input v-model="employee_phone_number" type="text" id="edit_phone_number" name="phone_number" value=""><br>
                     <br>
                     <button type="button" v-on:click="editEmployee()">Submit</button>
                 </form>
