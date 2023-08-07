@@ -40,11 +40,14 @@
 }
 
 button {
-    margin-left: 4px;
-    margin-right: 4px;
     /*
-     * top and bottom padding
-     * right and left padding
+     * 1. top and bottom margin
+     * 2. right and left margin
+     */
+    margin: 8px 4px;
+    /*
+     * 1. top and bottom padding
+     * 2. right and left padding
      */
     padding: 2px 12px;
     border-radius: 6px;
@@ -52,6 +55,8 @@ button {
     background-color: #8f8f8f;
     border: 2px solid #8f8f8f;
 }
+
+/* button design */
 
 button:hover {
     background-color: #7a7a7a;
@@ -66,5 +71,17 @@ button:hover {
 .delete_button:hover {
     background-color: #b30000;
     border: 2px solid #b30000;
+}
+
+/* table design */
+
+th {
+    background-color: #535353;
+    color: white;
+}
+
+td, th {
+    border: 1px solid #2d2d2d;
+    padding: 8px;
 }
 
