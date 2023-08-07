@@ -3,7 +3,7 @@ import { ref } from 'vue'
 export default {
     setup() {},
     template: /*html*/`
-        <h1>Home</h1>
-        <p>This is the home page</p>
+        <h1>Employee Management System</h1>
+        <p> This is a system to organize employees in a company or organization.</p>
     `
 }
