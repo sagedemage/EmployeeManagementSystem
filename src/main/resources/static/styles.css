@@ -97,3 +97,12 @@ td, th {
     padding: 8px;
 }
 
+table {
+    /*
+     * 1. top and bottom margin
+     * 2. right and left margin
+     */
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
