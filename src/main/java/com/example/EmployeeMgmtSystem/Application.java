@@ -3,7 +3,7 @@
  * Accessing Data with JPA
  */
 
-package com.example.EmployeeManagementSystem;
+package com.example.EmployeeMgmtSystem;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

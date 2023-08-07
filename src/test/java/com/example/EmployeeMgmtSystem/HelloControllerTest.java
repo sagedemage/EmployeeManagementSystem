@@ -1,6 +1,6 @@
 /* Building an Application with Spring Boot */
 
-package com.example.EmployeeManagementSystem;
+package com.example.EmployeeMgmtSystem;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

@@ -1,6 +1,6 @@
 /* Accessing data with MySQL */
 
-package com.example.EmployeeManagementSystem;
+package com.example.EmployeeMgmtSystem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

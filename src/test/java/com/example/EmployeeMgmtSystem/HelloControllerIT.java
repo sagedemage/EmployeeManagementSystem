@@ -1,6 +1,6 @@
 /* Building an Application with Spring Boot */
 
-package com.example.EmployeeManagementSystem;
+package com.example.EmployeeMgmtSystem;
 
 import org.junit.jupiter.api.Test;
 
