@@ -39,11 +39,7 @@ export default {
         }
     },
     methods: {
-        openAddModal() {
-            /* Open modal containing a form to add an employee */
-            let modal = document.getElementById("add_modal");
-            modal.style.display = "block";
-        },
+        /* Employee CRUD operations */
         addEmployee() {
             /* Add Employee (CREATE) */
             axios.post("/employee/add", {
@@ -58,6 +54,35 @@ export default {
             .catch((error) => {
                 console.log(error)
             })
+        },
+        fetchEmployee(employee_id) {
+            /* Fetch employee data (READ) */
+            axios.get("/employee/fetch?id=" + employee_id)
+                .then((response) => {
+                    console.log(response.data)
+                    this.edit_employee_name = response.data.name;
+                    this.edit_employee_email = response.data.email;
+                    this.edit_employee_phone_number = response.data.phone_number;
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
+        editEmployee() {
+            /* Edit employee data (UPDATE) */
+            axios.patch("/employee/update", {
+                id: this.employee_id,
+                name: this.edit_employee_name,
+                email: this.edit_employee_email,
+                phone_number: this.edit_employee_phone_number,
+            })
+                .then((response) => {
+                    console.log(response.data)
+                    location.reload();
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
         },
         deleteEmployee(employee_id) {
             /* Delete employee (DELETE) */
@@ -79,19 +104,11 @@ export default {
                     })
             }
         },
-        fetchEmployee(employee_id) {
-            /* Fetch employee data (READ) */
-            // fetch employee data
-            axios.get("/employee/fetch?id=" + employee_id)
-                .then((response) => {
-                    console.log(response.data)
-                    this.edit_employee_name = response.data.name;
-                    this.edit_employee_email = response.data.email;
-                    this.edit_employee_phone_number = response.data.phone_number;
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+        /* Modal GUI */
+        openAddModal() {
+            /* Open modal containing a form to add an employee */
+            let modal = document.getElementById("add_modal");
+            modal.style.display = "block";
         },
         openEditModal(employee_id) {
             /* Open modal containing a form to edit an employee */
@@ -103,22 +120,6 @@ export default {
             modal.style.display = "block";
 
             this.fetchEmployee(this.employee_id)
-        },
-        editEmployee() {
-            /* Edit employee data (UPDATE) */
-            axios.patch("/employee/update", {
-                id: this.employee_id,
-                name: this.edit_employee_name,
-                email: this.edit_employee_email,
-                phone_number: this.edit_employee_phone_number,
-            })
-                .then((response) => {
-                    console.log(response.data)
-                    location.reload();
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
         },
     },
     template: /*html*/`
