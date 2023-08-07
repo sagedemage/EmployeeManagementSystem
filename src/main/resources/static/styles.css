@@ -16,6 +16,8 @@
     flex-direction: column;
 }
 
+/* modal design */
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -30,7 +32,6 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content */
 .modal_content {
     background-color: #fefefe;
     margin: auto;
@@ -63,14 +64,24 @@ button:hover {
     border: 2px solid #7a7a7a;
 }
 
-.delete_button {
+.danger_button {
     background-color: #ce0000;
     border: 2px solid #ce0000;
 }
 
-.delete_button:hover {
+.danger_button:hover {
     background-color: #b30000;
     border: 2px solid #b30000;
+}
+
+.primary_button {
+    background-color: #245dff;
+    border: 2px solid #245dff;
+}
+
+.primary_button:hover {
+    background-color: #1e4ed8;
+    border: 2px solid #1e4ed8;
 }
 
 /* table design */
