@@ -131,7 +131,7 @@ export default {
                 <td>{{ employee.phone_number }}</td>
                 <td>
                     <button v-on:click="openEditModal(employee.id)">Edit</button>
-                    <button v-on:click="deleteEmployee(employee.id)">Delete</button>
+                    <button class="delete_button" v-on:click="deleteEmployee(employee.id)">Delete</button>
                 </td>
             </tr>
         </table>

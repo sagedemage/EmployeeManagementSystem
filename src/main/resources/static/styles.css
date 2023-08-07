@@ -39,3 +39,32 @@
     width: 80%;
 }
 
+button {
+    margin-left: 4px;
+    margin-right: 4px;
+    /*
+     * top and bottom padding
+     * right and left padding
+     */
+    padding: 2px 12px;
+    border-radius: 6px;
+    color: white;
+    background-color: #8f8f8f;
+    border: 2px solid #8f8f8f;
+}
+
+button:hover {
+    background-color: #7a7a7a;
+    border: 2px solid #7a7a7a;
+}
+
+.delete_button {
+    background-color: #ce0000;
+    border: 2px solid #ce0000;
+}
+
+.delete_button:hover {
+    background-color: #b30000;
+    border: 2px solid #b30000;
+}
+
