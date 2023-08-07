@@ -7,9 +7,16 @@ export default {
         const employees = response.data;
 
         let employee_id = ref(0);
-        let employee_name = ref("");
-        let employee_email = ref("");
-        let employee_phone_number = ref("");
+
+        /* Add employee state */
+        let add_employee_name = ref("");
+        let add_employee_email = ref("");
+        let add_employee_phone_number = ref("");
+
+        /* Edit employee state */
+        let edit_employee_name = ref("");
+        let edit_employee_email = ref("");
+        let edit_employee_phone_number = ref("");
 
         console.log(employees)
 
@@ -23,11 +30,13 @@ export default {
             let edit_modal = document.getElementById("edit_modal");
             if (event.target == edit_modal) {
                 edit_modal.style.display = "none";
-                localStorage.removeItem("employee_id");
             }
         }
 
-        return { employees, employee_id, employee_name, employee_email, employee_phone_number }
+        return { employees, employee_id,
+            add_employee_name, add_employee_email, add_employee_phone_number,
+            edit_employee_name, edit_employee_email, edit_employee_phone_number,
+        }
     },
     methods: {
         openAddModal() {
@@ -38,9 +47,9 @@ export default {
         addEmployee() {
             /* Add Employee (CREATE) */
             axios.post("/employee/add", {
-                name: this.employee_name,
-                email: this.employee_email,
-                phone_number: this.employee_phone_number,
+                name: this.add_employee_name,
+                email: this.add_employee_email,
+                phone_number: this.add_employee_phone_number,
             })
             .then((response) => {
                 console.log(response.data)
@@ -76,9 +85,9 @@ export default {
             axios.get("/employee/fetch?id=" + employee_id)
                 .then((response) => {
                     console.log(response.data)
-                    this.employee_name = response.data.name;
-                    this.employee_email = response.data.email;
-                    this.employee_phone_number = response.data.phone_number;
+                    this.edit_employee_name = response.data.name;
+                    this.edit_employee_email = response.data.email;
+                    this.edit_employee_phone_number = response.data.phone_number;
                 })
                 .catch((error) => {
                     console.log(error)
@@ -86,8 +95,6 @@ export default {
         },
         openEditModal(employee_id) {
             /* Open modal containing a form to edit an employee */
-            //localStorage.setItem("employee_id", employee_id)
-
             if (employee_id !== 0) {
                 this.employee_id = employee_id
             }
@@ -99,13 +106,11 @@ export default {
         },
         editEmployee() {
             /* Edit employee data (UPDATE) */
-            let employee_id = this.employee_id
-
             axios.patch("/employee/update", {
                 id: this.employee_id,
-                name: this.employee_name,
-                email: this.employee_email,
-                phone_number: this.employee_phone_number,
+                name: this.edit_employee_name,
+                email: this.edit_employee_email,
+                phone_number: this.edit_employee_phone_number,
             })
                 .then((response) => {
                     console.log(response.data)
@@ -142,11 +147,11 @@ export default {
                 <b>Add Employee</b>
                 <form action="#" name="add_employee_form">
                     <label for="add_name">Name:</label><br>
-                    <input v-model="employee_name" type="text" id="add_name" name="name" value=""><br>
+                    <input v-model="add_employee_name" type="text" id="add_name" name="name"><br>
                     <label for="add_email">Email</label><br>
-                    <input v-model="employee_email" type="text" id="add_email" name="email" value=""><br>
+                    <input v-model="add_employee_email" type="text" id="add_email" name="email"><br>
                     <label for="add_phone_number">Phone number</label><br>
-                    <input v-model="employee_phone_number" type="text" id="add_phone_number" name="phone_number" value=""><br>
+                    <input v-model="add_employee_phone_number" type="text" id="add_phone_number" name="phone_number"><br>
                     <br>
                     <button type="button" v-on:click="addEmployee()">Submit</button>
                 </form>
@@ -159,11 +164,11 @@ export default {
                 <b>Edit Employee</b>
                 <form action="#" name="edit_employee_form">
                     <label for="add_name">Name:</label><br>
-                    <input v-model="employee_name" type="text" id="edit_name" name="name" value=""><br>
+                    <input v-model="edit_employee_name" type="text" id="edit_name" name="name"><br>
                     <label for="add_email">Email</label><br>
-                    <input v-model="employee_email" type="text" id="edit_email" name="email" value=""><br>
+                    <input v-model="edit_employee_email" type="text" id="edit_email" name="email"><br>
                     <label for="add_phone_number">Phone number</label><br>
-                    <input v-model="employee_phone_number" type="text" id="edit_phone_number" name="phone_number" value=""><br>
+                    <input v-model="edit_employee_phone_number" type="text" id="edit_phone_number" name="phone_number"><br>
                     <br>
                     <button type="button" v-on:click="editEmployee()">Submit</button>
                 </form>
