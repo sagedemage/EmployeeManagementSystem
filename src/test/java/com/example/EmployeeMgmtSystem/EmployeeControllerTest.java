@@ -40,8 +40,8 @@ public class EmployeeControllerTest {
             public final String phone_number = "1112223333";
         };
 
-        ObjectMapper obj_mapper = new ObjectMapper();
-        String json = obj_mapper.writeValueAsString(obj);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(obj);
 
         this.mvc.perform(post("/employee/add")
                 .contentType(MediaType.APPLICATION_JSON)
