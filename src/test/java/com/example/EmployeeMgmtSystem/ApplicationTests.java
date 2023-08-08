@@ -1,3 +1,5 @@
+/* Main Application Test */
+
 package com.example.EmployeeMgmtSystem;
 
 import org.junit.jupiter.api.Test;

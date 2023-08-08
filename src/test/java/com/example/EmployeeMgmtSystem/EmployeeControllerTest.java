@@ -1,4 +1,4 @@
-/* Building an Application with Spring Boot */
+/* Test Employee Rest APIs */
 
 package com.example.EmployeeMgmtSystem;
 
@@ -28,6 +28,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void fetchEmployee() throws Exception {
+        /* Test fetch employee api */
         this.mvc.perform(get("/employee/fetch?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("\"id\":1")));
@@ -35,6 +36,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void addEmployee() throws Exception {
+        /* Test add employee api */
         AddEmployee body = new AddEmployee("john", "john@email.com", "1112223333");
 
         ObjectMapper objectMapper = new ObjectMapper();

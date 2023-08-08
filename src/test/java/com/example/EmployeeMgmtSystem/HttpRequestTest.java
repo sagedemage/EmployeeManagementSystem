@@ -1,4 +1,4 @@
-/* Building an Application with Spring Boot */
+/* Test HTTP Request */
 
 package com.example.EmployeeMgmtSystem;
 
@@ -23,6 +23,7 @@ public class HttpRequestTest {
 
     @Test
     public void validateTitleTag() throws Exception {
+        /* Test to validate the title tag is correct */
         assertThat(this.template.getForObject("http://localhost:" + port + "/", String.class))
                 .contains("<title>EMS - Home</title>");
     }
