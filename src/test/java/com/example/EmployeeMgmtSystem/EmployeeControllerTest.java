@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,7 +23,7 @@ public class EmployeeControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void getHello() throws Exception {
+    public void fetchEmployee() throws Exception {
         this.mvc.perform(get("/employee/fetch?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("\"id\":1")));
