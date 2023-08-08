@@ -6,7 +6,7 @@ package com.example.EmployeeMgmtSystem;
 
 import org.springframework.data.repository.CrudRepository;
 
-/* This will be AUTO IMPLEMENTED by Spring into a Bean called employeeRepository
-CRUD (Create, Read, Update, Delete) */
+/* Creates a repository that holds employee records */
+// Spring automatically implements this repository interface in a bean called employeeRepository
 
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {}
