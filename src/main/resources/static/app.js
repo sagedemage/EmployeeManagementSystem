@@ -1,4 +1,4 @@
-/* Main Vue App */
+/* Vue Application */
 import {ref, computed} from 'vue'
 import Home from './components/pages/home.js'
 import About from './components/pages/about.js'
