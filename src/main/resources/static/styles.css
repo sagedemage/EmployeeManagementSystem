@@ -1,0 +1,112 @@
+/*
+ * Global CSS Styling
+ */
+
+#content {
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 75px;
+}
+
+#copyright {
+    height: 75px;
+    text-align: center;
+    margin-top: auto;
+}
+
+#body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* modal design */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal_content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 17%;
+    border-radius: 16px;
+}
+
+button {
+    /*
+     * 1. top and bottom margin
+     * 2. right and left margin
+     */
+    margin: 8px 4px;
+    /*
+     * 1. top and bottom padding
+     * 2. right and left padding
+     */
+    padding: 2px 12px;
+    border-radius: 6px;
+    color: white;
+    background-color: #8f8f8f;
+    border: 2px solid #8f8f8f;
+}
+
+/* button design */
+
+button:hover {
+    background-color: #7a7a7a;
+    border: 2px solid #7a7a7a;
+}
+
+.danger_button {
+    background-color: #ce0000;
+    border: 2px solid #ce0000;
+}
+
+.danger_button:hover {
+    background-color: #b30000;
+    border: 2px solid #b30000;
+}
+
+.primary_button {
+    background-color: #245dff;
+    border: 2px solid #245dff;
+}
+
+.primary_button:hover {
+    background-color: #1e4ed8;
+    border: 2px solid #1e4ed8;
+}
+
+/* table design */
+
+th {
+    background-color: #535353;
+    color: white;
+}
+
+td, th {
+    border: 1px solid #2d2d2d;
+    padding: 8px;
+}
+
+table {
+    /*
+     * 1. top and bottom margin
+     * 2. right and left margin
+     */
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+

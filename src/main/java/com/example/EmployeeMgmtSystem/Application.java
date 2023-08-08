@@ -1,9 +1,8 @@
 /*
- * Building an Application with Spring Boot
- * Accessing Data with JPA
+ * Main Spring Application
  */
 
-package com.example.EmployeeManagementSystem;
+package com.example.EmployeeMgmtSystem;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

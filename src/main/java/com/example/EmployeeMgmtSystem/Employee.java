@@ -1,6 +1,8 @@
-/* Accessing data with MySQL */
+/*
+ * Employee Model
+ */
 
-package com.example.EmployeeManagementSystem;
+package com.example.EmployeeMgmtSystem;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
