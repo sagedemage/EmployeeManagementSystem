@@ -1,4 +1,7 @@
-/* Navigation Bar UI */
+/*
+ * Navigation Bar UI
+ */
+
 export default {
     template: /*html*/`
         <nav class="navbar fixed-top bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">

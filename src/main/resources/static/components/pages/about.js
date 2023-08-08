@@ -1,4 +1,7 @@
-/* About Page */
+/*
+ * About Page
+ */
+
 export default {
     setup() {},
     template: /*html*/`

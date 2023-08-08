@@ -1,4 +1,6 @@
-/* Home Page */
+/*
+ * Home Page
+ */
 export default {
     setup() {},
     template: /*html*/`

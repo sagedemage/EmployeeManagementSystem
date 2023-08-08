@@ -1,4 +1,7 @@
-/* Footer UI */
+/*
+ * Footer UI
+ */
+
 export default {
     setup() {
         const current_year = new Date().getFullYear()

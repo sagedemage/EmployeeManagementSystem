@@ -1,4 +1,7 @@
-/* Table Page */
+/*
+ * Table Page
+ */
+
 import { ref } from 'vue'
 
 export default {
