@@ -5,6 +5,7 @@ package com.example.EmployeeMgmtSystem;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.example.EmployeeMgmtSystem.request_bodies.AddEmployee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
-record addEmployee(String name, String email, String phone_number) {}
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,7 +35,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void addEmployee() throws Exception {
-        addEmployee body = new addEmployee("john", "john@email.com", "1112223333");
+        AddEmployee body = new AddEmployee("john", "john@email.com", "1112223333");
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(body);

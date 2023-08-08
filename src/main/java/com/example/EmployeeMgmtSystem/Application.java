@@ -1,6 +1,5 @@
 /*
- * Building an Application with Spring Boot
- * Accessing Data with JPA
+ * Main Spring Boot Application
  */
 
 package com.example.EmployeeMgmtSystem;

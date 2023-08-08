@@ -1,4 +1,4 @@
-/* Accessing data with MySQL */
+/* Employee Model */
 
 package com.example.EmployeeMgmtSystem;
 

@@ -1,7 +1,8 @@
-/* Accessing data with MySQL */
+/* Employee Rest APIs */
 
 package com.example.EmployeeMgmtSystem;
 
+import com.example.EmployeeMgmtSystem.request_bodies.MessageStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
