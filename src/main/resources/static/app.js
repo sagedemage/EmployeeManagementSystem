@@ -13,6 +13,8 @@ export default {
     },
     setup() {
         const count = ref(0)
+
+        /* Vue Routing */
         const routes = {
             '/': Home,
             '/about': About,
