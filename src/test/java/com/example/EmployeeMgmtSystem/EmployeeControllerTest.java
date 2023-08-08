@@ -36,10 +36,10 @@ public class EmployeeControllerTest {
 
     @Test
     public void addEmployee() throws Exception {
-        addEmployee obj = new addEmployee("john", "john@email.com", "1112223333");
+        addEmployee body = new addEmployee("john", "john@email.com", "1112223333");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(obj);
+        String json = objectMapper.writeValueAsString(body);
 
         this.mvc.perform(post("/employee/add")
                 .contentType(MediaType.APPLICATION_JSON)
