@@ -1,5 +1,5 @@
 /*
- * Main Spring Boot Application
+ * Main Spring Application
  */
 
 package com.example.EmployeeMgmtSystem;
