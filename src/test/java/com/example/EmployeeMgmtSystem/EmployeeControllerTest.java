@@ -18,6 +18,8 @@ import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+record addEmployee(String name, String email, String phone_number) {}
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class EmployeeControllerTest {
@@ -34,11 +36,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void addEmployee() throws Exception {
-        Object obj = new Object() {
-            public final String name = "john";
-            public final String email = "john@email.com";
-            public final String phone_number = "1112223333";
-        };
+        addEmployee obj = new addEmployee("john", "john@email.com", "1112223333");
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(obj);
