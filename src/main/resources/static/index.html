@@ -7,6 +7,7 @@
     <title>EMS - Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0">
+    <!-- Vue.js -->
     <!--
 		Development: https://unpkg.com/vue@3/dist/vue.esm-browser.js
 		Production: https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js
@@ -18,13 +19,18 @@
             }
         }
     </script>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- Custom styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="app"></div>
+  <!-- Axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <!-- Main Vue program -->
   <script type="module">
       import {createApp} from 'vue'
       import App from './app.js'
