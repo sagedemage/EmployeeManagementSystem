@@ -56,11 +56,14 @@ public class EmployeeController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody MessageStatus updateEmployee(@RequestBody Employee employeeBody) {
         /* Update employee api with updates the data of employee (UPDATE)
-         * The required attributes: name, email, and phone_number
+         * The required attributes: id, name, email, and phone_number
          */
 
         // Error handling for required attributes
-        if (employeeBody.getName() == null) {
+        if (employeeBody.getId() == null) {
+            return new MessageStatus("Error", "Id is empty");
+        }
+        else if (employeeBody.getName() == null) {
             return new MessageStatus("Error", "Name is empty");
         } else if (employeeBody.getEmail() == null) {
             return new MessageStatus("Error", "Email is empty");
