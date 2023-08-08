@@ -1,4 +1,6 @@
-/* Employee Model */
+/*
+ * Employee Model
+ */
 
 package com.example.EmployeeMgmtSystem;
 

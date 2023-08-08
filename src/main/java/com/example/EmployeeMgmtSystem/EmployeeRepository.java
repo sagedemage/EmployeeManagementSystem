@@ -1,4 +1,6 @@
-/* Accessing Employee data from MySQL database */
+/*
+ * Accessing Employee data from MySQL database
+ */
 
 package com.example.EmployeeMgmtSystem;
 
