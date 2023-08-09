@@ -32,4 +32,12 @@ build/
 ### VS Code ###
 .vscode/
 
+### Environemental Variables ###
 .env
+
+### Media files ###
+*.kra
+*.xcf
+
+### Cache files ###
+*.*~
