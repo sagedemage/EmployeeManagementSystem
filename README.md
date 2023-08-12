@@ -1,7 +1,7 @@
 # Employee Management System
 This is a program that provides a system to manage employees in a company or organization.
 
-<img src="./images/program_screenshot.webp" alt="program screenshot" width="480" height="270">
+![program screenshot](./images/program_screenshot.webp)
 
 ## Purpose
 The purpose is for me to learn to use Spring Boot and Vue.js without Node.js in order to create a full stack web application.
